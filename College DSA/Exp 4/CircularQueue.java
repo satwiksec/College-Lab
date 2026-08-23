@@ -2,50 +2,43 @@ import java.util.Scanner;
 
 class CircularQueue {
     int[] queue;
-    int front, rear, size;
+    int front, rear, size, count;
 
     CircularQueue(int n) {
         size = n;
         queue = new int[size];
-        front = -1;
+        front = 0;
         rear = -1;
+        count = 0;
     }
 
     void enqueue(int value) {
-        if ((rear + 1) % size == front) {
+        if (count == size) {
             System.out.println("Queue is Full");
             return;
         }
 
-        if (front == -1) {
-            front = 0;
-            rear = 0;
-        } else {
-            rear = (rear + 1) % size;
-        }
-
+        rear = (rear + 1) % size;
         queue[rear] = value;
+        count++;
+
         System.out.println("Print Job " + value + " Added");
     }
 
     void dequeue() {
-        if (front == -1) {
+        if (count == 0) {
             System.out.println("Queue is Empty");
             return;
         }
 
         System.out.println("Print Job " + queue[front] + " Completed");
 
-        if (front == rear) {
-            front = -1;
-            rear = -1;
-        } else {
-            front = (front + 1) % size;
-        }
+        front = (front + 1) % size;
+        count--;
     }
 
     void display() {
-        if (front == -1) {
+        if (count == 0) {
             System.out.println("Queue is Empty");
             return;
         }
@@ -53,12 +46,8 @@ class CircularQueue {
         System.out.print("Print Queue: ");
 
         int i = front;
-        while (true) {
+        for (int j = 0; j < count; j++) {
             System.out.print(queue[i] + " ");
-
-            if (i == rear)
-                break;
-
             i = (i + 1) % size;
         }
 
