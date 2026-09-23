@@ -1,76 +1,45 @@
 import java.util.Scanner;
-import java.util.Stack;
 
-public class InfixToPostfix {
+public class QueueExample {
 
-    public static int precedence(char ch) {
-        if (ch == '+' || ch == '-')
-            return 1;
-        if (ch == '*' || ch == '/')
-            return 2;
-        if (ch == '^')
-            return 3;
-        return -1;
-    }
+    int[] queue = new int[5];
+    int front = -1;
+    int rear = -1;
 
-    public static String convertToPostfix(String infix) {
-        Stack<Character> stack = new Stack<>();
-        String postfix = "";
+    void enqueue(int value) {
 
-        for (int i = 0; i < infix.length(); i++) {
-            char ch = infix.charAt(i);
-
-            if (Character.isLetterOrDigit(ch)) {
-                postfix += ch;
-            } else if (ch == '(') {
-                stack.push(ch);
-            } else if (ch == ')') {
-                while (!stack.isEmpty() && stack.peek() != '(') {
-                    postfix += stack.pop();
-                }
-                if (!stack.isEmpty()) {
-                    stack.pop();
-                }
-            } else {
-                while (!stack.isEmpty() && precedence(ch) <= precedence(stack.peek())) {
-                    postfix += stack.pop();
-                }
-                stack.push(ch);
-            }
+        if (rear == queue.length - 1) {
+            System.out.println("Queue is full!");
+            return;
         }
 
-        while (!stack.isEmpty()) {
-            postfix += stack.pop();
+        if (front == -1) {
+            front = 0;
         }
 
-        return postfix;
+        rear++;
+        queue[rear] = value;
+
+        System.out.println(value + " inserted into queue.");
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    void dequeue() {
 
-        System.out.print("Enter Infix Expression: ");
-        String infix = sc.nextLine();
+        if (front == -1) {
+            System.out.println("Queue is empty!");
+            return;
+        }
 
-        String postfix = convertToPostfix(infix);
-
-        System.out.println("Postfix Expression: " + postfix);
-
-        sc.close();
-    }
-}
         System.out.println(queue[front] + " removed from queue.");
 
         front++;
 
-        
         if (front > rear) {
             front = -1;
             rear = -1;
         }
     }
 
-   
     void peek() {
 
         if (front == -1) {
@@ -122,7 +91,6 @@ public class InfixToPostfix {
                 case 1:
                     System.out.print("Enter value: ");
                     int value = sc.nextInt();
-
                     q.enqueue(value);
                     break;
 
