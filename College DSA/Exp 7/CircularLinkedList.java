@@ -122,5 +122,6 @@ class CircularLinkedList {
             }
 
         } while(choice != 4);
+        sc.close();
     }
 }

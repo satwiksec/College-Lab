@@ -92,5 +92,6 @@ class InfixPostfix {
                 System.out.println("Invalid choice");
 
         } while(choice != 2);
+        sc.close();
     }
 }
