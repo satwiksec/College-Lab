@@ -17,7 +17,7 @@ public class Main {
         if (root == null)
             return new Node(data);
 
-        if (data < root.data)
+        if (data < root.data)git pull --no-rebase https://github.com/satwiksec/College-Lab.git main --allow-unrelated-histories
             root.left = insert(root.left, data);
         else if (data > root.data)
             root.right = insert(root.right, data);
